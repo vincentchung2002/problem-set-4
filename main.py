@@ -15,9 +15,7 @@ def main():
     # ETL the datasets into dataframes
     directories = ['data/part2_plots', 'data/part3_plots', 'data/part4_plots', 'data/part5_plots']
     part1.create_directories(directories)
-    
-    pred_universe, arrest_events, charge_counts, charge_counts_by_offense = part1.extract_transform()
-    
+    pred_universe, arrest_events, charge_counts, charge_counts_by_offense, pred_universe_merged = part1.extract_transform()
     ##  PART 2: PLOT EXAMPLES  ##
     # Apply plot theme
     part2.seaborn_settings()
@@ -30,24 +28,27 @@ def main():
 
     ##  PART 3: BAR PLOTS AND HISTOGRAMS  ##
     # 1
-
+    part3.bar_fta(pred_universe)
     # 2
-
+    part3.bar_fta_by_sex(pred_universe)
     # 3
-
+    part3.hist_age(pred_universe)
     # 4
-
+    part3.hist_age_bins(pred_universe)
+    
     ##  PART 4: CATEGORICAL PLOTS  ##
     # 1
-    
+    part4.catplot_felony_pred(pred_universe_merged)
     # 2
-
+    part4.catplot_nonfelony_pred(pred_universe_merged)
     # 3
-
+    part4.catplot_felony_pred_by_rearrest(pred_universe_merged)
+    
     ##  PART 5: SCATTERPLOTS  ##
     # 1
-    
+    part5.scatter_predictions_by_charge(pred_universe_merged)
     # 2
+    part5.scatter_pred_vs_actual(pred_universe_merged)
 
 
 if __name__ == "__main__":
